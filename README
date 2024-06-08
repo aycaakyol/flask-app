@@ -1,3 +1,4 @@
-##Notes 
-- frontend sends date to backend as dd-mm-yyyy and backend send it as mm-dd-yyyy (this should turn in frontend)
+###Notes
+
+You can access from: http://localhost:7001
 
