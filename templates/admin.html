@@ -1,0 +1,59 @@
+<!-- admin.html -->
+
+{% extends "base.html" %} {% block head %}
+<title>Admin Page</title>
+{{ super() }}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/admin.css') }}"
+/>
+
+{% endblock %} {% block body %}
+
+<div class="container">
+  <div class="date-section">
+    <div class="today-date" id="today-date">
+      <!-- Today's date will be inserted here dynamically using JavaScript -->
+    </div>
+    <div class="buttons">
+      <input type="date" id="selected-date" />
+      <button id="prev-day">&lt;</button>
+      <button id="next-day">&gt;</button>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        {% for time_slot in time_slots %}
+        <th>{{ time_slot }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for room in dep_rooms %}
+      <tr>
+        <td>{{ room.name }}</td>
+        {% for time_slot in time_slots %}
+        <td data-room-name="{{ room.name }}" data-time-slot="{{ time_slot }}"></td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <span class="reserved"></span> Reserved &nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="your-reservations"></span> Your Reservations
+  </div>
+</div>
+<script>
+  var userRole = "{{ user_role }}"; // Embed is_student variable from Flask
+  var username = "{{ username }}"; // Embed username variable from Flask
+  var department = "{{ department }}"; // Embed department variable from Flask
+</script>
+<script type="application/json" id="my-reservations">{{ my_reservations | tojson | safe }}</script>
+<script type="application/json" id="other-reservations">{{ other_reservations | tojson | safe }}</script>
+<script src="{{ url_for('static', filename='javascript/admin.js') }}"></script>
+{% endblock %} {% block is_student %}True{% endblock %}
