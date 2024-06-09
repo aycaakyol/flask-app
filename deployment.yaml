@@ -17,6 +17,7 @@ spec:
       containers:
       - name: flask-app
         image: aycaakyol3/flask-app-web:latest
+        imagePullPolicy: Always  
         ports:
         - containerPort: 7001
         env:
