@@ -7,18 +7,18 @@ pipeline {
         KUBECONFIG_CREDENTIALS_ID = 'kubeconfig' // Update with your kubeconfig credentials ID
         SONARQUBE_SCANNER = 'SonarQube'
         SONARQUBE_TOKEN = 'sonarqube-token' // Update with your SonarQube token ID
-        DOCKER_HOME = tool name: 'myDocker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+        // DOCKER_HOME = tool name: 'myDocker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
         PATH = "/opt/homebrew/bin:${env.PATH}"
     }
 
     stages {
-        stage('Initialize') {
-            steps {
-                script {
-                    env.PATH = "${DOCKER_HOME}/bin:${env.PATH}"
-                }
-            }
-        }
+        // stage('Initialize') {
+        //     steps {
+        //         script {
+        //             env.PATH = "${DOCKER_HOME}/bin:${env.PATH}"
+        //         }
+        //     }
+        // }
 
         stage('Checkout') {
             steps {
