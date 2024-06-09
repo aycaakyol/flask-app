@@ -9,6 +9,11 @@ pipeline {
         SONARQUBE_TOKEN = 'sonarqube-token' // Update with your SonarQube token ID
     }
 
+    stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
