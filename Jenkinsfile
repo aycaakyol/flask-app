@@ -9,6 +9,7 @@ pipeline {
         SONARQUBE_TOKEN = 'sonarqube-token' // Update with your SonarQube token ID
         // DOCKER_HOME = tool name: 'myDocker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
         PATH = "/opt/homebrew/bin:${env.PATH}"
+        SONAR_HOST_URL = 'http://sonarqube:9000'
     }
 
     stages {
@@ -38,7 +39,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv(SONARQUBE_SCANNER) {
-                        sh 'sonar-scanner'
+                        sh 'sonar-scanner -Dsonar.projectKey=myproject -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONARQUBE_TOKEN'
                     }
                 }
             }
