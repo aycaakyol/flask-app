@@ -8,6 +8,7 @@ pipeline {
         SONARQUBE_SCANNER = 'SonarQube'
         SONARQUBE_TOKEN = 'sonarqube-token' // Update with your SonarQube token ID
         // DOCKER_HOME = tool name: 'myDocker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+        PATH = "/opt/homebrew/bin:${env.PATH}"
     }
 
     stages {
