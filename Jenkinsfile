@@ -10,6 +10,7 @@ pipeline {
         // DOCKER_HOME = tool name: 'myDocker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
         PATH = "/opt/homebrew/bin:${env.PATH}"
         SONAR_HOST_URL = 'http://sonarqube:9000'
+        KUBECONFIG = '/root/.kube/config'
     }
 
     stages {
@@ -65,9 +66,11 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                withKubeConfig([credentialsId: KUBECONFIG_CREDENTIALS_ID]) {
-                    sh 'kubectl apply -f kubernetes/deployment.yaml'
-                    sh 'kubectl apply -f kubernetes/service.yaml'
+                script {
+                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                        sh 'kubectl apply -f kubernetes/deployment.yaml'
+                        sh 'kubectl apply -f kubernetes/service.yaml'
+                    }
                 }
             }
         }
