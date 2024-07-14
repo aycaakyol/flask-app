@@ -68,8 +68,10 @@ pipeline {
             steps {
                 script {
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        sh 'kubectl apply -f kubernetes/deployment.yaml'
-                        sh 'kubectl apply -f kubernetes/service.yaml'
+                        withEnv(['KUBECONFIG=/root/.kube/config']) {
+                            sh 'kubectl apply -f kubernetes/deployment.yaml'
+                            sh 'kubectl apply -f kubernetes/service.yaml'
+                        }
                     }
                 }
             }
@@ -82,3 +84,12 @@ pipeline {
         }
     }
 }
+
+
+// docker run --name docker-jenkins --rm -u root -p 8080:8080 -p 50000:50000 \
+//     -v /opt/homebrew/bin/docker:/usr/bin/docker \
+//     -v /var/jenkins_home:/var/jenkins_home \
+//     -v /var/run/docker.sock:/var/run/docker.sock \
+//     -v /Users/ayca/.minikube:/root/.minikube \
+//     -v /Users/ayca/.kube:/root/.kube \
+//     my-jenkins-sonar-scanner

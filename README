@@ -1,4 +1,17 @@
-###Notes
+# Room Reservation System for Hacettepe University
 
-You can access from: http://localhost:7001
+For our Database Management Systems' final project, me and my teammate designed a reservation system using Flask for backend and Jinja templates and Javascript for frontend. 
+
+This project focuses on database design and transdaction management. UI & UX is not focused on because it was used mainly for testing functionality. 
+
+## Users & Functionalities:
+- There are 3 types of users: admins (department secretaries), instructors and students. Each have different permissions.
+- User can make a reservation for one time or a recurring reservation.
+- User can delete reservation.
+- User can change reservation date and time.
+- If the desired timeslot is reserved, the system suggests other rooms that meet the wanted criteria.
+- User can request a feature (internet, boardmarker etc.) for a room or if the feature is not working, user can notify the admins through the system. 
+
+## DevOps
+Although not wanted by the original project, I tried to create a CI/CD process using Docker, Kubernetes and Jenkins. 
 
